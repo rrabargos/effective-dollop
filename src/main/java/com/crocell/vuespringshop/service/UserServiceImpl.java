@@ -3,6 +3,7 @@ package com.crocell.vuespringshop.service;
 import com.crocell.vuespringshop.model.Role;
 import com.crocell.vuespringshop.model.User;
 import com.crocell.vuespringshop.repository.UserRepository;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -12,21 +13,22 @@ import java.time.LocalDateTime;
 import java.util.Optional;
 
 @Service
+@RequiredArgsConstructor
 public class UserServiceImpl implements UserService{
 
-    @Autowired
-    private UserRepository userRepository;
-
-    @Autowired
-    private PasswordEncoder passwordEncoder;
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public User saveUser(User user){
-        user.setPassword(passwordEncoder.encode(user.getPassword()));
-        user.setRole(Role.USER);
-        user.setCreateTime(LocalDateTime.now());
 
-        return userRepository.save(user);
+        return userRepository.save(
+                User.builder()
+                .password(passwordEncoder.encode(user.getPassword()))
+                .role(Role.USER)
+                .createTime(LocalDateTime.now())
+                .build()
+        );
     }
 
     @Override

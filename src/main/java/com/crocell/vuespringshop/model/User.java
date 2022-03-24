@@ -1,12 +1,15 @@
 package com.crocell.vuespringshop.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Data
+@Builder
 @Entity
+@AllArgsConstructor
+@NoArgsConstructor
+@Getter
 @Table(name = "users") //can't use user as it is a reserved word in SQL
 public class User {
     @Id
