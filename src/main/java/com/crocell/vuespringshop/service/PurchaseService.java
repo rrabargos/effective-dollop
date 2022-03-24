@@ -6,7 +6,7 @@ import com.crocell.vuespringshop.repository.projection.PurchaseItem;
 import java.util.List;
 
 public interface PurchaseService {
-  Purchase savePuchase(Purchase purchase);
+  Purchase savePurchase(Purchase purchase);
 
   List<PurchaseItem> findPurchaseItemsOfUser(Long userId);
 }

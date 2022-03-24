@@ -16,7 +16,7 @@ public class PurchaseServiceImpl implements PurchaseService{
   private final PurchaseRepository purchaseRepository;
 
   @Override
-  public Purchase savePuchase(Purchase purchase){
+  public Purchase savePurchase(Purchase purchase){
     purchase.setPurchaseTime(LocalDateTime.now());
 
     return purchaseRepository.save(purchase);
