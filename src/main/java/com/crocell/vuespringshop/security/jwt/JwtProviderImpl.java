@@ -47,6 +47,7 @@ public class JwtProviderImpl implements JwtProvider {
             .compact();
   }
 
+  @Override
   public boolean isTokenValid(HttpServletRequest httpServletRequest){
     Claims claims = extractClaims(httpServletRequest);
 
