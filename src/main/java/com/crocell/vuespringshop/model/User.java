@@ -5,11 +5,8 @@ import lombok.*;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Builder
 @Entity
-@AllArgsConstructor
-@NoArgsConstructor
-@Getter
+@Data
 @Table(name = "users") //can't use user as it is a reserved word in SQL
 public class User {
     @Id

@@ -14,31 +14,28 @@ import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
-public class UserServiceImpl implements UserService{
+public class UserServiceImpl implements UserService {
 
-    private final UserRepository userRepository;
-    private final PasswordEncoder passwordEncoder;
+  private final UserRepository userRepository;
+  private final PasswordEncoder passwordEncoder;
 
-    @Override
-    public User saveUser(User user){
+  @Override
+  public User saveUser(User user) {
+    user.setPassword(passwordEncoder.encode(user.getPassword()));
+    user.setRole(Role.USER);
+    user.setCreateTime(LocalDateTime.now());
 
-        return userRepository.save(
-                User.builder()
-                .password(passwordEncoder.encode(user.getPassword()))
-                .role(Role.USER)
-                .createTime(LocalDateTime.now())
-                .build()
-        );
-    }
+    return userRepository.save(user);
+  }
 
-    @Override
-    public Optional<User> findByUsername(String username){
-        return userRepository.findByUsername(username);
-    }
+  @Override
+  public Optional<User> findByUsername(String username) {
+    return userRepository.findByUsername(username);
+  }
 
-    @Override
-    @Transactional //Transactional is only required when executing update queries
-    public void changeRole(Role newRole, String username){
-        userRepository.updateUserRole(username, newRole);
-    }
+  @Override
+  @Transactional //Transactional is only required when executing update queries
+  public void changeRole(Role newRole, String username) {
+    userRepository.updateUserRole(username, newRole);
+  }
 }
