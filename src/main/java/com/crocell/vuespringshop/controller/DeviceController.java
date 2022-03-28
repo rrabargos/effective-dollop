@@ -19,7 +19,7 @@ public class DeviceController {
     return new ResponseEntity<>(deviceService.saveDevice(device), HttpStatus.CREATED);
   }
 
-  @PostMapping("{deviceId}") //will look like: api/device/{deviceId}
+  @DeleteMapping("{deviceId}") //will look like: api/device/{deviceId}
   public ResponseEntity<?> deleteDevice(@PathVariable Long deviceId) {
     deviceService.deleteDevice(deviceId);
     return new ResponseEntity<>(HttpStatus.OK);
