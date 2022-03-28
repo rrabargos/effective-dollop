@@ -4,6 +4,7 @@ import com.crocell.vuespringshop.model.User;
 import com.crocell.vuespringshop.service.UserService;
 import com.crocell.vuespringshop.utils.SecurityUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;

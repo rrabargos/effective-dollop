@@ -14,9 +14,9 @@ import org.springframework.stereotype.Service;
 @RequiredArgsConstructor
 public class AuthenticationServiceImpl implements AuthenticationService{
 
-  private AuthenticationManager authenticationManager;
+  private final AuthenticationManager authenticationManager;
 
-  private JwtProvider jwtProvider;
+  private final JwtProvider jwtProvider;
 
   @Override
   public User signInAndReturnJWT(User signInRequest){
