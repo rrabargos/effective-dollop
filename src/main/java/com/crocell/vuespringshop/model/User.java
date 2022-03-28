@@ -28,4 +28,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private Role role;
+
+    @Transient
+    //not saved in db, on the fly only.
+    private String token;
 }
