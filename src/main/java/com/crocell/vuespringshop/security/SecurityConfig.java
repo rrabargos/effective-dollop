@@ -1,10 +1,12 @@
 package com.crocell.vuespringshop.security;
 
+import com.crocell.vuespringshop.model.Role;
 import com.crocell.vuespringshop.security.jwt.JwtAuthorizationFilter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.BeanIds;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -35,7 +37,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     http.csrf().disable();
     http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
 
-    http.authorizeRequests().antMatchers("/api/authentication/**").permitAll()
+    http.authorizeRequests()
+            .antMatchers("/api/authentication/**").permitAll()
+
+            //start with GET methods and then with post methods
+            .antMatchers(HttpMethod.GET, "/api/device").permitAll()
+            .antMatchers("/api/device/**").hasRole(Role.ADMIN.name())
             .anyRequest().authenticated();
 
     http.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);
