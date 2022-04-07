@@ -22,6 +22,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 @Configuration
 @EnableWebSecurity
+@RequiredArgsConstructor
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
   @Autowired
   private CustomUserDetailsService customUserDetailsService;
@@ -43,6 +44,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             //start with GET methods and then with post methods
             .antMatchers(HttpMethod.GET, "/api/device").permitAll()
             .antMatchers("/api/device/**").hasRole(Role.ADMIN.name())
+            .antMatchers("/**").permitAll()
             .anyRequest().authenticated();
 
     http.addFilterBefore(jwtAuthorizationFilter(), UsernamePasswordAuthenticationFilter.class);

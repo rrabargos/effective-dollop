@@ -17,6 +17,7 @@ import java.util.Set;
 @RequiredArgsConstructor
 public class CustomUserDetailsService implements UserDetailsService {
 
+  @Autowired
   private final UserService userService;
 
   @Override
