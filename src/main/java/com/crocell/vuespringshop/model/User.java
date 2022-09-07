@@ -1,12 +1,12 @@
 package com.crocell.vuespringshop.model;
 
-import lombok.Data;
+import lombok.*;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
-@Data
 @Entity
+@Data
 @Table(name = "users") //can't use user as it is a reserved word in SQL
 public class User {
     @Id
@@ -28,4 +28,8 @@ public class User {
     @Enumerated(EnumType.STRING)
     @Column(name = "role", nullable = false)
     private Role role;
+
+    @Transient
+    //not saved in db, on the fly only.
+    private String token;
 }

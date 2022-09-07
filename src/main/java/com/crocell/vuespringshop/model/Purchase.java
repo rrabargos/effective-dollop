@@ -34,7 +34,7 @@ public class Purchase {
 
 
     @Column(name = "color", nullable = false)
-    private Double color;
+    private String color;
 
     @Column(name = "purchase_time", nullable = false)
     private LocalDateTime purchaseTime;
